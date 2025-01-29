@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section>
+    <h2>Prediction Result</h2>
+    <p><strong>Result:</strong> {{ result_message }}</p>
+    <p><strong>Age:</strong> {{ age }}</p>
+    <p><strong>Smoking Habit:</strong> {{ smoking }}</p>
+    <p><strong>Symptoms:</strong> {{ symptoms }}</p>
+    <a href="/predict">Go back to prediction</a>
+    <a href="/history">View Prediction History</a>
+</section>
+{% endblock %}

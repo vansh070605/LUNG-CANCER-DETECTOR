@@ -1,0 +1,40 @@
+import joblib
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import classification_report
+
+# Sample dataset (replace with your actual dataset)
+data = {
+    'age': [45, 50, 62, 34, 56, 72, 64, 45, 50, 48],
+    'smoking': [1, 0, 1, 0, 1, 1, 0, 1, 0, 0],  # 1: Smoker, 0: Non-Smoker
+    'cough': [1, 0, 1, 0, 1, 1, 0, 0, 0, 1],     # 1: Present, 0: Not Present
+    'fatigue': [1, 0, 1, 1, 1, 0, 0, 1, 0, 1],    # 1: Present, 0: Not Present
+    'chest_pain': [1, 0, 1, 0, 1, 1, 0, 0, 0, 1], # 1: Present, 0: Not Present
+    'has_cancer': [1, 0, 1, 0, 1, 1, 0, 0, 0, 1]  # 1: Has Cancer, 0: No Cancer
+}
+
+# Convert the dictionary to a DataFrame
+df = pd.DataFrame(data)
+
+# Features (X) and target variable (y)
+X = df.drop('has_cancer', axis=1)  # Features
+y = df['has_cancer']              # Target variable (1 = Lung Cancer, 0 = No Cancer)
+
+# Split data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+# Initialize the model (Random Forest Classifier in this case)
+model = RandomForestClassifier(n_estimators=100, random_state=42)
+
+# Train the model
+model.fit(X_train, y_train)
+
+# Evaluate the model (Optional)
+y_pred = model.predict(X_test)
+print(classification_report(y_test, y_pred))
+
+# Save the trained model to a .pkl file
+joblib.dump(model, 'lung_cancer_model.pkl')
+
+print("Model saved as lung_cancer_model.pkl")

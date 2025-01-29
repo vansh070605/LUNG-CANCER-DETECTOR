@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<form method="POST" action="/predict">
+    <h2>Input Your Medical Data</h2>
+    <label for="age">Age:</label>
+    <input type="number" name="age" id="age" placeholder="Enter your age" required>
+
+    <label for="smoking">Smoking History:</label>
+    <input type="text" name="smoking" id="smoking" placeholder="E.g., Yes/No" required>
+
+    <label for="symptoms">Symptoms:</label>
+    <textarea name="symptoms" id="symptoms" rows="4" placeholder="Describe your symptoms"></textarea>
+
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}

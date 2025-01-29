@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lung Cancer Detection - Prediction Form</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> <!-- Make sure your styles.css is in the 'static' folder -->
+</head>
+<body>
+    <header>
+        <h1>Lung Cancer Detection</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Enter Your Details for Prediction</h2>
+            <form method="POST" enctype="multipart/form-data">
+                <!-- Additional Fields for more accuracy -->
+                <label for="smoking">Do you smoke?</label>
+                <select name="smoking" id="smoking" required>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                    <option value="former">Former Smoker</option>
+                </select>
+
+                <label for="familyHistory">Family History of Lung Cancer?</label>
+                <select name="familyHistory" id="familyHistory" required>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+
+                <label for="age">Age:</label>
+                <input type="number" name="age" id="age" min="18" required>
+
+                <!-- Upload CT scan Image -->
+                <label for="ctscan">Upload CT Scan Image (Optional):</label>
+                <input type="file" name="ctscan" id="ctscan" accept="image/*">
+
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Lung Cancer Detection. All rights reserved.</p>
+    </footer>
+</body>
+</html>
