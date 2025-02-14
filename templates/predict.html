@@ -1,16 +1,97 @@
 {% extends 'base.html' %}
 {% block content %}
-<form method="POST" action="/predict">
-    <h2>Input Your Medical Data</h2>
-    <label for="age">Age:</label>
-    <input type="number" name="age" id="age" placeholder="Enter your age" required>
+<section>
+    <h2>Lung Cancer Prediction</h2>
+    
+    <form action="{{ url_for('predict') }}" method="POST">
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required>
 
-    <label for="smoking">Smoking History:</label>
-    <input type="text" name="smoking" id="smoking" placeholder="E.g., Yes/No" required>
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
 
-    <label for="symptoms">Symptoms:</label>
-    <textarea name="symptoms" id="symptoms" rows="4" placeholder="Describe your symptoms"></textarea>
+        <label for="smoking">Smoking:</label>
+        <select id="smoking" name="smoking">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
 
-    <button type="submit">Submit</button>
-</form>
+        <label for="yellow_fingers">Yellow Fingers:</label>
+        <select id="yellow_fingers" name="yellow_fingers">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="anxiety">Anxiety:</label>
+        <select id="anxiety" name="anxiety">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="peer_pressure">Peer Pressure:</label>
+        <select id="peer_pressure" name="peer_pressure">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="chronic_disease">Chronic Disease:</label>
+        <select id="chronic_disease" name="chronic_disease">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="fatigue">Fatigue:</label>
+        <select id="fatigue" name="fatigue">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="allergy">Allergy:</label>
+        <select id="allergy" name="allergy">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="wheezing">Wheezing:</label>
+        <select id="wheezing" name="wheezing">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="alcohol">Alcohol Consuming:</label>
+        <select id="alcohol" name="alcohol">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="coughing">Coughing:</label>
+        <select id="coughing" name="coughing">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="shortness_of_breath">Shortness of Breath:</label>
+        <select id="shortness_of_breath" name="shortness_of_breath">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="swallowing_difficulty">Swallowing Difficulty:</label>
+        <select id="swallowing_difficulty" name="swallowing_difficulty">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="chest_pain">Chest Pain:</label>
+        <select id="chest_pain" name="chest_pain">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <button type="submit">Predict</button>
+    </form>
+</section>
 {% endblock %}

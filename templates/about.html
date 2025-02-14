@@ -4,16 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - Lung Cancer Detection</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <header>
-        <div class="navbar">
-            <a href="/">Home</a>
-            <a href="/about">About</a>
-            <a href="/contact">Contact</a>
-        </div>
         <h1>Lung Cancer Detection</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/predict">Predict</a>
+            <a href="/history">History</a>
+            <a href="/about" class="active">About</a>
+        </nav>
     </header>
 
     <main>
@@ -32,6 +33,10 @@
                     detection tool. It aims to raise awareness about lung cancer and help users identify
                     possible symptoms that might require further medical attention.
                 </p>
+                <p class="highlight-quote">
+                    <em>“Early detection saves lives. Our mission is to provide an easy and effective tool to help users take charge of their health.”</em>
+                </p>
+                <a href="/predict" class="cta-button">Try the Prediction Tool</a>
             </section>
 
             <section class="how-it-works">
@@ -62,19 +67,20 @@
                     solutions that can help in the early detection of health issues like lung cancer.
                 </p>
                 <ul>
-                    <li><strong>Team Member 1:</strong> Vansh Agrawal (Project Lead)</li>
-                    <li><strong>Team Member 2:</strong> Shashwat Sharma (Backend Developer)</li>
-                    <li><strong>Team Member 3:</strong> Prajjwal Rawat (Frontend Developer)</li>
-                    <li><strong>Team Member 4:</strong> Abhyuday Singh Panwar (Machine Learning Engineer)</li>
-                    <li><strong>Team Member 5:</strong> Harsh Khetan (UI/UX Designer)</li>
+                    <li><strong>Vansh Agrawal:</strong> Project Lead </li>
+                    <li><strong>Shashwat Sharma:</strong> Backend Developer</li>
+                    <li><strong>Prajjwal Rawat:</strong> Frontend Developer</li>
+                    <li><strong>Abhyuday Singh Panwar:</strong> Machine Learning Engineer</li>
+                    <li><strong>Harsh Khetan:</strong> UI/UX Designer</li>
                 </ul>
             </section>
-            
         </section>
     </main>
-
+<br>
+<br>
+<br>
     <footer>
-        <p>&copy; 2025 Lung Cancer Detection. All Rights Reserved.</p>
+        <p>&copy; 2025 Lung Cancer Detection. All rights reserved.</p>
     </footer>
 </body>
 </html>
