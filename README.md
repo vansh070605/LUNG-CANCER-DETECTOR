@@ -18,7 +18,7 @@
 - **Machine Learning Model:** Scikit-learn (RandomForestClassifier, joblib for model loading)  
 
 ## 📂 Project Structure
-
+```
 Lung_Cancer_Detection/
 │── instance/                  # Database files
 │   ├── lung_cancer.db         # SQLite database storing patient data
@@ -41,6 +41,7 @@ Lung_Cancer_Detection/
 │── lung_cancer_er.jpg          # ER diagram for database
 │── README.md                   # Project documentation
 │── requirements.txt            # Required dependencies
+```
 
 ## 🔧 Installation & Setup  
 
