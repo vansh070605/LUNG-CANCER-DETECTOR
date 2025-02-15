@@ -18,8 +18,8 @@
 - **Database:** SQLite  
 - **Machine Learning Model:** Scikit-learn (RandomForestClassifier, joblib for model loading)  
 
-## 📂 Project Structure  
-```
+## 📂 Project Structure
+
 Lung_Cancer_Detection/
 │── instance/                  # Database files
 │   ├── lung_cancer.db         # SQLite database storing patient data
@@ -42,7 +42,6 @@ Lung_Cancer_Detection/
 │── lung_cancer_er.jpg          # ER diagram for database
 │── README.md                   # Project documentation
 │── requirements.txt            # Required dependencies
-```
 
 ## 🔧 Installation & Setup  
 
@@ -50,7 +49,6 @@ Lung_Cancer_Detection/
 ```sh
 git clone https://github.com/vansh070605/LUNG-CANCER-DETECTOR.git
 cd LUNG-CANCER-DETECTOR
-```
 
 ### 2️⃣ Create a Virtual Environment  
 ```sh
