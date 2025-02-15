@@ -117,10 +117,3 @@ This project is licensed under the **MIT License**.
 ✨ *Feel free to contribute by submitting issues or pull requests!*  
 🔗 **Stay Connected:** [LinkedIn](https://linkedin.com/in/your-profile) | [GitHub](https://github.com/vansh070605)  
 ```
-
-### 🔥 Changes & Improvements:  
-- **Enhanced Formatting** for better readability on GitHub  
-- **More Structured Features & Tech Stack**  
-- **Refined Project Structure** (Matches your uploaded directory)  
-- **Improved Installation Steps**  
-- **Future Enhancements Section Expanded**
