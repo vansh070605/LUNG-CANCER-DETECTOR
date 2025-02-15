@@ -108,11 +108,3 @@ joblib.dump(model, "lung_cancer_model.pkl")
 👨‍💻 **Prajjwal Rawat**  
 👨‍💻 **Abhyuday Singh Panwar**  
 👨‍💻 **Harsh Khetan**  
-
-## 📜 License  
-This project is licensed under the **MIT License**.  
-
----
-
-✨ *Feel free to contribute by submitting issues or pull requests!*  
-🔗 **Stay Connected:** [LinkedIn](https://linkedin.com/in/your-profile) | [GitHub](https://github.com/vansh070605)
