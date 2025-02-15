@@ -1,5 +1,3 @@
-Here's your updated **README.md** file with a more structured and professional format while keeping all your details intact:  
-
 ```markdown
 # 🫁 Lung Cancer Detection  
 
@@ -127,6 +125,4 @@ This project is licensed under the **MIT License**.
 - **More Structured Features & Tech Stack**  
 - **Refined Project Structure** (Matches your uploaded directory)  
 - **Improved Installation Steps**  
-- **Future Enhancements Section Expanded**  
-
-This is **ready to copy-paste** into your **GitHub repository** under `README.md`. Let me know if you need further modifications! 🚀
+- **Future Enhancements Section Expanded**
