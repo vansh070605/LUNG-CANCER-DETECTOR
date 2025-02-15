@@ -1,4 +1,3 @@
-```markdown
 # 🫁 Lung Cancer Detection  
 
 ## 📌 Project Overview  
