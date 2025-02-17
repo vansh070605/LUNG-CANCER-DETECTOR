@@ -103,8 +103,5 @@ joblib.dump(model, "lung_cancer_model.pkl")
 ---
 
 ## 📝 Contributors  
-👨‍💻 **Vansh Agrawal** (Team Lead)  
-👨‍💻 **Shashwat Sharma**  
-👨‍💻 **Prajjwal Rawat**  
-👨‍💻 **Abhyuday Singh Panwar**  
-👨‍💻 **Harsh Khetan**  
+👨‍💻 **Vansh Agrawal**  
+👨‍💻 **Shashwat Sharma**
