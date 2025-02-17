@@ -9,10 +9,13 @@ from sklearn.metrics import accuracy_score
 # 📌 Load the dataset
 df = pd.read_csv('survey lung cancer.csv')
 
+# 📌 Fix column name inconsistencies by stripping spaces
+df.columns = df.columns.str.strip()
+
 # 📌 Check for missing values
 df = df.dropna()  # Remove rows with missing values
 
-# 📌 Encode categorical variables
+# 📌 Encode categorical variables safely
 label_encoders = {}
 for column in df.select_dtypes(include=['object']).columns:
     le = LabelEncoder()
@@ -22,6 +25,10 @@ for column in df.select_dtypes(include=['object']).columns:
 # 📌 Define features (X) and target (y)
 X = df.drop(columns=['LUNG_CANCER'])  # Features
 y = df['LUNG_CANCER']  # Target variable
+
+# 📌 Ensure feature consistency by storing column order & dtypes
+feature_order = X.columns.tolist()
+feature_dtypes = X.dtypes.to_dict()
 
 # 📌 Split dataset into training (80%) and testing (20%)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -42,40 +49,57 @@ joblib.dump(model, 'lung_cancer_model.pkl')
 # 📌 Save label encoders for decoding later
 joblib.dump(label_encoders, 'label_encoders.pkl')
 
+# 📌 Save feature order and dtypes
+joblib.dump({'feature_order': feature_order, 'feature_dtypes': feature_dtypes}, 'feature_metadata.pkl')
+
 print("✅ Model training complete! The trained model is saved as 'lung_cancer_model.pkl'.")
 print("✅ Label encoders are saved as 'label_encoders.pkl'.")
+print("✅ Feature metadata is saved as 'feature_metadata.pkl'.")
 
 # -------------- PREDICTION FUNCTION --------------
 def predict_lung_cancer(user_input_dict):
-    """
-    Function to make predictions using the trained model.
-    user_input_dict: Dictionary of input features with column names as keys.
-    """
-    # 📌 Load trained model & encoders
+    # 📌 Load model and label encoders
     model = joblib.load('lung_cancer_model.pkl')
     label_encoders = joblib.load('label_encoders.pkl')
+    metadata = joblib.load('feature_metadata.pkl')
 
-    # 📌 Convert input dictionary to DataFrame
-    user_input_df = pd.DataFrame([user_input_dict])  # Convert dict to DataFrame
+    feature_order = metadata['feature_order']
+    feature_dtypes = metadata['feature_dtypes']
 
-    # 📌 Encode categorical inputs using the same encoders
+    # 📌 Convert user input into DataFrame
+    user_input_df = pd.DataFrame([user_input_dict])
+
+    # 📌 Fix column inconsistencies
+    user_input_df.columns = user_input_df.columns.str.strip()
+
+    # 📌 Encode categorical inputs safely
     for column in user_input_df.columns:
-        if column in label_encoders:  # Only encode if the column was categorical
-            user_input_df[column] = label_encoders[column].transform(user_input_df[column])
+        if column in label_encoders:
+            if user_input_df[column].iloc[0] in label_encoders[column].classes_:
+                user_input_df[column] = label_encoders[column].transform(user_input_df[column])
+            else:
+                print(f"⚠️ Warning: Unexpected category '{user_input_df[column].iloc[0]}' in column '{column}'. Using default encoding.")
+                user_input_df[column] = label_encoders[column].transform([label_encoders[column].classes_[0]])[0]  # Use fallback
 
-    # 📌 Ensure column order matches training data
-    user_input_df = user_input_df[X_train.columns]  # Keep only required columns
+    # 📌 Ensure correct column order and fill missing columns
+    user_input_df = user_input_df.reindex(columns=feature_order, fill_value=0)
+
+    # 📌 Convert data types to match training set
+    user_input_df = user_input_df.astype(feature_dtypes)
+
+    # 📌 Debugging: Print processed input
+    print("🔎 Processed Input Data:\n", user_input_df)
 
     # 📌 Make prediction
     prediction = model.predict(user_input_df)[0]
+    probability = model.predict_proba(user_input_df)
 
-    # 📌 Decode the output (if necessary)
-    result = "YES (High Risk)" if prediction == 1 else "NO (Low Risk)"
-    
-    return result
+    print("📊 Model Prediction Probabilities:", probability)
+    print("🔢 Raw Prediction:", prediction)
+
+    return "YES (High Risk)" if prediction == 1 else "NO (Low Risk)"
 
 # -------------- EXAMPLE PREDICTION INPUT --------------
-# Sample input with all 15 features
 sample_input = {
     'AGE': 65,
     'GENDER': 'M',
@@ -84,8 +108,8 @@ sample_input = {
     'ANXIETY': 0,
     'PEER_PRESSURE': 1,
     'CHRONIC DISEASE': 0,
-    'FATIGUE ': 1,
-    'ALLERGY ': 0,
+    'FATIGUE': 1,
+    'ALLERGY': 0,
     'WHEEZING': 1,
     'ALCOHOL CONSUMING': 1,
     'COUGHING': 1,
