@@ -97,7 +97,8 @@ def predict_lung_cancer(user_input_dict):
     print("📊 Model Prediction Probabilities:", probability)
     print("🔢 Raw Prediction:", prediction)
 
-    return "YES (High Risk)" if prediction == 1 else "NO (Low Risk)"
+    # Return a consistent result string
+    return "High Risk" if prediction == 1 else "Low Risk"
 
 # -------------- EXAMPLE PREDICTION INPUT --------------
 sample_input = {

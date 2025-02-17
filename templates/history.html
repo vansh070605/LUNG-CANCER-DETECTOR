@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
+
 {% block content %}
 <section class="history-section">
-    <h2>🩺 Prediction History</h2>
+    <h2>Prediction History</h2>
 
     {% if predictions %}
         <table class="history-table">
@@ -9,6 +10,7 @@
                 <tr>
                     <th>Date & Time</th>
                     <th>Age</th>
+                    <th>Gender</th>
                     <th>Smoking</th>
                     <th>Symptoms</th>
                     <th>Prediction Result</th>
@@ -19,25 +21,29 @@
                 <tr>
                     <td>{{ prediction.date.strftime('%d %b %Y, %I:%M %p') }}</td>
                     <td>{{ prediction.age }}</td>
+                    <td>{{ prediction.gender }}</td>
+                    <td>{{ 'Yes' if prediction.smoking == 1 else 'No' }}</td>
                     <td>
-                        {% if prediction.smoking == "Yes" %}
-                            ✅ Yes
-                        {% else %}
-                            ❌ No
-                        {% endif %}
-                    </td>
-                    <td>
-                        {% if prediction.symptoms and prediction.symptoms != "None" %}
-                            <span class="symptom-list">{{ prediction.symptoms }}</span>
-                        {% else %}
-                            ❌ None
-                        {% endif %}
+                        <ul>
+                            {% if prediction.yellow_fingers == 1 %}<li>Yellow Fingers</li>{% endif %}
+                            {% if prediction.anxiety == 1 %}<li>Anxiety</li>{% endif %}
+                            {% if prediction.peer_pressure == 1 %}<li>Peer Pressure</li>{% endif %}
+                            {% if prediction.chronic_disease == 1 %}<li>Chronic Disease</li>{% endif %}
+                            {% if prediction.fatigue == 1 %}<li>Fatigue</li>{% endif %}
+                            {% if prediction.allergy == 1 %}<li>Allergy</li>{% endif %}
+                            {% if prediction.wheezing == 1 %}<li>Wheezing</li>{% endif %}
+                            {% if prediction.alcohol == 1 %}<li>Alcohol Consuming</li>{% endif %}
+                            {% if prediction.coughing == 1 %}<li>Coughing</li>{% endif %}
+                            {% if prediction.shortness_of_breath == 1 %}<li>Shortness of Breath</li>{% endif %}
+                            {% if prediction.swallowing_difficulty == 1 %}<li>Swallowing Difficulty</li>{% endif %}
+                            {% if prediction.chest_pain == 1 %}<li>Chest Pain</li>{% endif %}
+                        </ul>
                     </td>
                     <td class="result-cell">
-                        {% if prediction.result == "Positive" %}
-                            <span class="positive">🟥 High Risk</span>
+                        {% if prediction.result == 'High Risk' %}
+                            <span class="positive">High Risk 😔</span>
                         {% else %}
-                            <span class="negative">🟩 Low Risk</span>
+                            <span class="negative">Low Risk ✅</span>
                         {% endif %}
                     </td>
                 </tr>
@@ -46,7 +52,7 @@
         </table>
 
         <form action="{{ url_for('clear_history') }}" method="post" class="clear-history-form">
-            <button type="submit" class="clear-button" onclick="return confirm('Are you sure you want to clear history?')">🗑️ Clear History</button>
+            <button type="submit" class="clear-button" onclick="return confirm('Are you sure you want to clear history?')">Clear History</button>
         </form>
     {% else %}
         <p class="no-history">No past predictions found.</p>
@@ -89,31 +95,15 @@
         margin-top: 20px;
     }
     .clear-button {
-        background-color: #dc3545;
+        background-color: #f44336;
         color: white;
-        padding: 12px 25px;
         border: none;
+        padding: 10px 20px;
         cursor: pointer;
         font-size: 16px;
-        border-radius: 8px;
-        transition: 0.3s ease;
     }
     .clear-button:hover {
-        background-color: #b71c1c;
-    }
-    .no-history {
-        font-size: 18px;
-        color: #555;
-        margin-top: 20px;
-    }
-    @media (max-width: 768px) {
-        .history-table {
-            font-size: 14px;
-        }
-        .clear-button {
-            font-size: 14px;
-            padding: 10px 20px;
-        }
+        background-color: #d32f2f;
     }
 </style>
 
