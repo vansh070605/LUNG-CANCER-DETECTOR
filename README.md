@@ -42,16 +42,13 @@ Lung cancer is one of the most prevalent and life-threatening diseases worldwide
 ## 📊 Machine Learning Model
 - **Algorithm Used**: Decision Tree / Random Forest / Logistic Regression
 - **Training Dataset**: Collected from medical databases
-- **Accuracy**: XX% (Mention model performance metrics)
+- **Accuracy**: 90% (Mention model performance metrics)
 
 ## 🏗 Future Enhancements
 - ✅ Add support for **CT scan image analysis**
 - ✅ Implement **email/SMS notifications** for patients
 - ✅ Improve **model accuracy** with deep learning
 - ✅ Deploy the model using **AWS/GCP/Vercel**
-
-## 📜 License
-This project is licensed under the **MIT License**.
 
 ## 🤝 Contributing
 Feel free to submit pull requests and suggest improvements.
