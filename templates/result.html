@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <!-- Link to the CSS file -->
+    <link rel="stylesheet" href="/static/css/style.css"> <!-- Adjust the path as needed -->
+</head>
+<body>
+    <div class="container">
+        <h1 class="result-heading">{{ result }}</h1> <!-- Display the result here -->
+        <p class="result-description">
+            Based on the input data and analysis, we have determined the lung cancer risk. If the result indicates a high risk, we recommend seeking immediate medical advice and further testing.
+        </p>
+        
+        <div class="action-buttons">
+            <a href="/" class="button">Go Back</a>
+            <a href="/generate_report" class="button">Generate PDF Report</a>
+        </div>
+
+        <div class="additional-info">
+            <h3>What to Do Next</h3>
+            <p>If you're concerned about your health, please consult with a healthcare professional. This prediction is based on patterns in historical data and should not replace professional medical advice.</p>
+            <p>Remember to maintain a healthy lifestyle, avoid smoking, and get regular check-ups to ensure early detection and better outcomes.</p>
+        </div>
+    </div>
+</body>
+</html>
