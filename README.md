@@ -39,9 +39,6 @@ Lung cancer is one of the most prevalent and life-threatening diseases worldwide
    ```
 5. **Access the application** at `http://127.0.0.1:5000/`
 
-## 🖼️ Screenshots
-📌 *Include screenshots of your application here.*
-
 ## 📊 Machine Learning Model
 - **Algorithm Used**: Decision Tree / Random Forest / Logistic Regression
 - **Training Dataset**: Collected from medical databases
