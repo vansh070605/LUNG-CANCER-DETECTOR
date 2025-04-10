@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/history">History</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Previous Predictions</h1>
+        
+        {% if history_data %}
+            <table border="1">
+                <tr>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Smoking</th>
+                    <th>Cough</th>
+                    <th>Chest Pain</th>
+                    <th>Fatigue</th>
+                    <th>Shortness of Breath</th>
+                    <th>Prediction</th>
+                </tr>
+                {% for entry in history_data %}
+                <tr>
+                    <td>{{ entry.age }}</td>
+                    <td>{{ entry.gender }}</td>
+                    <td>{{ entry.smoking }}</td>
+                    <td>{{ entry.cough }}</td>
+                    <td>{{ entry.chest_pain }}</td>
+                    <td>{{ entry.fatigue }}</td>
+                    <td>{{ entry.shortness_of_breath }}</td>
+                    <td>{{ entry.prediction }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>No history available.</p>
+        {% endif %}
+    </div>
+
+</body>
+</html>

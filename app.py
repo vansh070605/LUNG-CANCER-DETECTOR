@@ -7,7 +7,30 @@ from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 import io
 from io import BytesIO
+import sqlite3
 import pandas as pd
+
+conn = sqlite3.connect('database.db')
+cursor = conn.cursor()
+
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS predictions (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        age INTEGER CHECK (age BETWEEN 0 AND 120),
+        gender TEXT NOT NULL,  
+        smoking TEXT CHECK (smoking IN ('yes', 'no')),
+        cough TEXT CHECK (cough IN ('yes', 'no')),
+        chest_pain TEXT CHECK (chest_pain IN ('yes', 'no')),
+        fatigue TEXT CHECK (fatigue IN ('yes', 'no')),
+        shortness_of_breath TEXT CHECK (shortness_of_breath IN ('yes', 'no')),
+        prediction TEXT NOT NULL,
+        prediction_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )
+''')
+
+conn.commit()
+conn.close()
+print("Table 'predictions' has been created successfully!")
 
 app = Flask(__name__)
 
@@ -22,13 +45,11 @@ def predict():
     try:
         age = request.form.get('age', type=int)
         gender = request.form.get('gender', 'Female')  # Default: Female
-        smoking = request.form.get('smoking', 'no').lower()    # Default: no
-        cough = request.form.get('cough', 'no').lower()        # Default: no
-        chest_pain = request.form.get('chest_pain', 'no').lower()  # Default: no
-        fatigue = request.form.get('fatigue', 'no').lower()        # Default: no
-        shortness_of_breath = request.form.get('shortness_of_breath', 'no').lower()  # Default: no
-
-        print(f"Received: Age={age}, Gender={gender}, Smoking={smoking}, Cough={cough}, Chest Pain={chest_pain}, Fatigue={fatigue}, Shortness of Breath={shortness_of_breath}")
+        smoking = request.form.get('smoking', 'no').lower()
+        cough = request.form.get('cough', 'no').lower()
+        chest_pain = request.form.get('chest_pain', 'no').lower()
+        fatigue = request.form.get('fatigue', 'no').lower()
+        shortness_of_breath = request.form.get('shortness_of_breath', 'no').lower()
 
         if age is None or age <= 0:
             return "Invalid age value. Please enter a positive number.", 400
@@ -46,18 +67,29 @@ def predict():
 
         result = "High risk of lung cancer" if prediction == 1 else "Low risk of lung cancer"
 
+        conn = sqlite3.connect('database.db')
+        cursor = conn.cursor()
+        cursor.execute('''
+            INSERT INTO predictions (age, gender, smoking, cough, chest_pain, fatigue, shortness_of_breath, prediction)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)''',
+            (age, 'Male' if gender else 'Female', 'yes' if smoking else 'no', 'yes' if cough else 'no', 
+             'yes' if chest_pain else 'no', 'yes' if fatigue else 'no', 'yes' if shortness_of_breath else 'no', result)
+        )
+        conn.commit()
+        conn.close()
+
         return render_template('result.html', result=result)
 
     except Exception as e:
-        print(f"Error: {str(e)}")  # Log error
-        return f"Error: {str(e)}", 500  # Catch any unexpected errors
+        print(f"Error: {str(e)}")
+        return f"Error: {str(e)}", 500
 
 
 
 @app.route('/predict_from_csv', methods=['POST'])
 def predict_from_csv():
     try:
-        dataset_path = 'lung_cancer_examples.csv'  # Ensure correct path
+        dataset_path = 'lung_cancer_examples.csv'
         data = pd.read_csv(dataset_path)
 
         print(data.head())
@@ -73,13 +105,12 @@ def predict_from_csv():
         return render_template('prediction_result.html', data=data.to_html())
 
     except Exception as e:
-        print(f"Error: {str(e)}")  # Log error
-        return f"Error: {str(e)}", 500  # Catch any unexpected errors
-
+        print(f"Error: {str(e)}")
+        return f"Error: {str(e)}", 500
 
 @app.route('/generate_report', methods=['GET'])
 def generate_report():
-    return generate_pdf()  # This will handle PDF creation and returning it as a response
+    return generate_pdf()
 
 
 def generate_pdf():
@@ -87,13 +118,32 @@ def generate_pdf():
 
     c = canvas.Canvas(buffer, pagesize=letter)
     c.drawString(100, 750, "Lung Cancer Risk Report")
-    c.drawString(100, 730, "Prediction: High risk (Example)")  # You can replace this with actual prediction results
+    c.drawString(100, 730, "Prediction: High risk (Example)")
 
     c.save()
 
     buffer.seek(0)
 
     return send_file(buffer, as_attachment=True, download_name="lung_cancer_report.pdf", mimetype="application/pdf")
+
+def get_history():
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT age, gender, smoking, cough, chest_pain, fatigue, shortness_of_breath, prediction FROM predictions")
+    data = cursor.fetchall()
+    conn.close()
+    
+    history_data = [
+        {"age": row[0], "gender": row[1], "smoking": row[2], "cough": row[3], "chest_pain": row[4],
+         "fatigue": row[5], "shortness_of_breath": row[6], "prediction": row[7]}
+        for row in data
+    ]
+    return history_data
+
+@app.route('/history')
+def history():
+    history_data = get_history()
+    return render_template('history.html', history_data=history_data)
 
 
 if __name__ == '__main__':

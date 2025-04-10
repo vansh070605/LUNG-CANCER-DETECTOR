@@ -5,6 +5,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
 body {
@@ -44,27 +45,75 @@ main {
 
 /* A wrapper around the form to center and control width */
 .form-container {
-    background: #1a1a1a;
-    border: 1px solid #333;
-    border-radius: 10px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.8);
-    width: 100%;
-    max-width: 400px; /* Reduced the width of the form */
+    max-width: 500px; /* Increase form width */
+    width: 90%; /* Make it responsive */
+    margin: auto;
     padding: 2rem;
-    margin: 0 auto; /* Center horizontally */
-    animation: slideIn 0.8s ease-in-out;
+    background: #fff; /* Light background */
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2rem;
+    }
+    .form-container {
+        padding: 1.5rem;
+    }
+    form input, form select {
+        font-size: 0.9rem;
+    }
+    button {
+        font-size: 1rem;
+    }
+}
+
 
 /* ---------------------------------------------------- */
 /* FORM                                                 */
 /* ---------------------------------------------------- */
 form {
-    background: #141414;
-    padding: 2rem;
+    background: #1c1c1c; /* Dark form background */
+    padding: 1.5rem;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
-    width: 50%; /* Ensures it fills the container */
+    box-shadow: 0px 4px 10px rgba(255, 99, 71, 0.5); /* Soft red shadow */
 }
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ff7675;
+    background: #2c2c2c;
+    color: white;
+}
+
+input::placeholder {
+    color: #aaa;
+}
+
+
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 6px;
+    background: #ff7675;
+    outline: none;
+    border-radius: 5px;
+    transition: 0.2s;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 15px;
+    height: 15px;
+    background: white;
+    border: 2px solid #ff7675;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
 
 form label {
     display: block;
@@ -221,6 +270,80 @@ a:hover {
     box-shadow: 0 8px 15px rgba(255, 107, 107, 0.7);
 }
 
+.intro-container {
+    text-align: center;
+    margin-top: 10vh;
+}
+
+.start-btn {
+    display: inline-block;
+    padding: 12px 20px;
+    font-size: 1.2rem;
+    color: #fff;
+    background: linear-gradient(45deg, #ff6b6b, #f94f6f);
+    text-decoration: none;
+    border-radius: 6px;
+    margin-top: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.start-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(255, 107, 107, 0.7);
+}
+
+
+/* ---------------------------------------------------- */
+/* NAVIGATION BAR                                       */
+/* ---------------------------------------------------- */
+
+header {
+    background: #1c1c1c;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+}
+
+nav {
+    background: #2c2c2c;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav li {
+    padding: 10px 15px;
+    background: #ff7675;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #ff6b6b;
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 8px 12px;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+nav ul li a:hover {
+    color: #f94f6f;
+    transform: scale(1.1);
+}
+
+
 /* ---------------------------------------------------- */
 /* ANIMATIONS                                           */
 /* ---------------------------------------------------- */
@@ -232,6 +355,22 @@ a:hover {
         opacity: 1;
     }
 }
+
+@media (max-width: 600px) {
+    .form-container {
+        width: 95%;
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    input, select {
+        font-size: 1rem;
+    }
+}
+
 
 @keyframes fadeInDown {
     from {
@@ -253,4 +392,262 @@ a:hover {
         opacity: 1;
         transform: translateX(0);
     }
+}
+
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #333;
+    padding: 15px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.navbar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar ul li {
+    margin: 0 20px;
+}
+
+.navbar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.navbar ul li a:hover {
+    color: #ff6600;
+}
+
+/* Container */
+.container {
+    width: 80%;
+    margin: 50px auto;
+    padding: 20px;
+    background: #1e1e1e;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Form */
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.btn {
+    background-color: #ff6600;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.btn:hover {
+    background-color: #e65c00;
+}
+
+/* Result Box */
+.result-box {
+    background: #dff0d8;
+    color: #3c763d;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #333;
+    padding: 15px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.navbar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar ul li {
+    margin: 0 20px;
+}
+
+.navbar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.navbar ul li a:hover {
+    color: #ff6600;
+}
+
+/* Container */
+.container {
+    max-width: 700px;
+    background: white;
+    margin: 100px auto;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+/* Form */
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+input[type="radio"] {
+    margin: 5px;
+    vertical-align: middle;
+}
+
+/* Reset hover effect for radio buttons */
+input[type="radio"]:hover {
+    background-color: transparent; /* Removes any background changes */
+    box-shadow: none; /* Disables any shadow effects */
+    transform: none; /* Prevents unwanted scaling */
+    cursor: default; /* Ensures the pointer remains normal */
+}
+
+input[type="radio"] {
+    transition: none !important; /* Disables any animations */
+}
+
+
+
+.btn {
+    background-color: #ff6600;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.btn:hover {
+    background-color: #e65c00;
+}
+
+/* Result Box */
+.result-box {
+    background: #dff0d8;
+    color: #3c763d;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+/* Table container */
+.table-container {
+    background: #1c1c1c; /* Dark background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(255, 99, 71, 0.3); /* Soft red glow */
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #2c2c2c; /* Dark table background */
+    color: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Table header */
+th {
+    background: #ff7675; /* Red theme */
+    color: white;
+    padding: 12px;
+    text-align: left;
+    font-weight: bold;
+}
+
+/* Table rows */
+td {
+    padding: 12px;
+    border-bottom: 1px solid #444; /* Subtle row separators */
+}
+
+/* Alternate row color */
+tr:nth-child(even) {
+    background: #333;
+}
+
+/* Hover effect */
+tr:hover {
+    background: #444;
+}
+
+/* Title styling */
+h2 {
+    color: #ff7675;
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 15px;
 }
